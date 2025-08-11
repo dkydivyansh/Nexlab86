@@ -1,0 +1,1042 @@
+.code-editor {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    white-space: pre;
+    tab-size: 2;
+    -moz-tab-size: 2;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 10px;
+    min-height: 200px;
+    resize: vertical;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+.code-editor:focus {
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+pre.json-display {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    white-space: pre;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    overflow-x: auto;
+    margin: 0;
+    tab-size: 2;
+    -moz-tab-size: 2;
+}
+
+.large-modal {
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+}
+
+.value-type-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.json-display {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    margin: 0;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.code-format {
+    tab-size: 2;
+    -moz-tab-size: 2;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+/* Table cell styles */
+.value-cell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+}
+
+.value-cell span {
+    display: inline-block;
+    max-width: calc(100% - 80px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+.value-cell .btn {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Copy button feedback */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.copy-feedback {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    animation: fadeOut 0.5s ease-in-out forwards;
+    animation-delay: 1.5s;
+}
+
+/* Disabled entry styles */
+.entry-disabled {
+    background-color: rgba(255, 0, 0, 0.15) !important;
+}
+
+.entry-disabled td {
+    color: #dc3545 !important;
+}
+
+/* Note with status indicator styles */
+.note-with-status {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.note-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status-indicator {
+    display: inline-block !important;
+    padding: 2px 6px !important;
+    background-color: #dc3545 !important;
+    color: white !important;
+    border-radius: 3px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+/* Add border to disabled rows */
+tr.entry-disabled td {
+    border: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Profile page styles */
+.profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container h1 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px;
+}
+
+.profile-form .form-group {
+    margin-bottom: 25px;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.profile-form input[disabled] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+    color: #6c757d;
+}
+
+.profile-form .help-text {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.password-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.password-section h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-form .form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Admin Styles */
+.admin-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h1 {
+    margin: 0;
+    color: #333;
+}
+
+.users-table {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.users-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.users-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.users-table tr:last-child td {
+    border-bottom: none;
+}
+
+.user-deactivated {
+    background-color: #f8f9fa;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.status-badge.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-badge.deactivated {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.inline-form {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.actions {
+    white-space: nowrap;
+}
+
+.btn-small {
+    padding: 4px 8px;
+    font-size: 0.85em;
+}
+
+.btn-warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #f57c00;
+}
+
+.btn-success {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #43a047;
+}
+
+/* Delete button styles */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Spacing for action buttons */
+.actions .btn-small {
+    margin: 0 2px;
+}
+
+.actions .btn-danger {
+    margin-left: 4px;
+}
+
+/* Message styles */
+.message {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Regular message styles - only apply transition to non-password-reset messages */
+.message:not(.admin-password-reset) {
+    transition: opacity 0.3s ease;
+}
+
+/* Password Reset Message - no transitions */
+.admin-password-reset {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 1 !important; /* Force opacity to always be 1 */
+}
+
+.admin-password-reset .message-header {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 12px 15px;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(165, 214, 167, 0.5);
+}
+
+.admin-password-reset .message-content {
+    padding: 15px;
+}
+
+.admin-password-reset .message-content p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+
+.admin-password-reset .message-content strong {
+    color: #1b5e20;
+    font-weight: 600;
+}
+
+.admin-password-reset .btn-close {
+    font-size: 22px;
+    padding: 0 8px;
+    color: #2e7d32;
+}
+
+.admin-password-reset .btn-close:hover {
+    color: #1b5e20;
+}
+
+.message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.message.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    font-weight: 500;
+}
+
+.message.error a {
+    color: #c62828;
+    text-decoration: underline;
+}
+
+.message.error a:hover {
+    color: #b71c1c;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    position: relative;
+    padding-right: 20px !important;
+}
+
+.dropdown-toggle::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    display: block;
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+    color: #1976d2;
+}
+
+/* Deactivation Notice */
+.deactivation-notice {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 12px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.notice-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    justify-content: center;
+}
+
+.notice-icon {
+    font-size: 1.2em;
+    display: inline-flex;
+    align-items: center;
+}
+
+.deactivation-notice .btn-danger {
+    margin-left: 15px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.deactivation-notice .btn-danger:hover {
+    background-color: #c62828;
+}
+
+/* Adjust spacing when deactivation notice is present */
+body.has-deactivation-notice {
+    padding-top: 1px;
+}
+
+.has-deactivation-notice .navbar {
+    margin-top: 48px;
+}
+
+.has-deactivation-notice .container {
+    margin-top: 24px;
+}
+
+/* Disabled Form Styles */
+.form-control:disabled,
+.btn:disabled {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.btn:disabled {
+    background-color: #ccc;
+    border-color: #bbb;
+}
+
+.form-control:disabled:hover,
+.btn:disabled:hover {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+/* Admin Activity Logs */
+.filters-container {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.logs-table {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.logs-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.logs-table th,
+.logs-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.logs-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.logs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.logs-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.page-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Date inputs */
+input[type="date"].form-control {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="date"].form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Password Reset Styles */
+.password-reset-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.password-reset-message .message-header {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 12px 15px;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(165, 214, 167, 0.5);
+}
+
+.password-reset-message .message-content {
+    padding: 15px;
+}
+
+.password-reset-message .message-content p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+
+.password-reset-message .message-content strong {
+    color: #1b5e20;
+    font-weight: 600;
+}
+
+.password-reset-message .btn-close {
+    font-size: 22px;
+    padding: 0 8px;
+    color: #2e7d32;
+}
+
+.password-reset-message .btn-close:hover {
+    color: #1b5e20;
+}
+
+/* Regular message styles */
+.message:not(.admin-password-reset) {
+    transition: opacity 0.3s ease;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.95em;
+}
+
+.new-password {
+    font-family: monospace;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 4px 8px;
+    border-radius: 3px;
+    user-select: all;
+}
+
+.btn-copy {
+    position: relative;
+    padding: 4px 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+    min-width: 60px;
+}
+
+.btn-copy:hover {
+    background-color: #43a047;
+}
+
+.btn-copy .copied-text {
+    display: none;
+}
+
+.btn-copy.copied .copy-text {
+    display: none;
+}
+
+.btn-copy.copied .copied-text {
+    display: inline;
+}
+
+.btn-copy.copied {
+    background-color: #388e3c;
+}
+
+/* Search Container */
+.search-container {
+    margin-left: auto;
+    max-width: 300px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-container input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Message Header */
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-header span {
+    flex: 1;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 20px;
+    padding: 0 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Password Reset Message */
+.password-reset-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.password-reset-message .message-header {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 10px 15px;
+    margin-bottom: 0;
+}
+
+.message-content {
+    padding: 15px;
+}
+
+.message-content p {
+    margin: 0 0 10px 0;
+}
+
+.message-content strong {
+    color: #1b5e20;
+}
+
+/* Admin Message Styles */
+.admin-message {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+    opacity: 1 !important;
+}
+
+.admin-message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.admin-message .message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-message .message-header span {
+    flex: 1;
+}
+
+.admin-message .btn-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 20px;
+    padding: 0 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.admin-message .btn-close:hover {
+    opacity: 1;
+}
+
+/* Regular message styles - only apply transition to non-admin messages */
+.message:not(.admin-message):not(.admin-password-reset) {
+    transition: opacity 0.3s ease;
+}
+
+/* API Logs Specific Styles */
+.method-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.method-badge.get {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.method-badge.put {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-badge.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-badge.error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+#request-data-modal pre {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    max-height: 400px;
+    margin: 10px 0;
+    font-family: monospace;
+    font-size: 0.9em;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Responsive adjustments for API logs */
+@media (max-width: 1024px) {
+    .logs-table {
+        overflow-x: auto;
+    }
+    
+    .logs-table table {
+        min-width: 900px;
+    }
+}
+
+/* Clear Logs Button Styles */
+.clear-logs-container {
+    margin: 20px 0;
+    text-align: right;
+}
+
+.clear-logs-container form {
+    display: inline-block;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    outline: none;
+}
+
+/* Modal Animation */
+.modal {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Style for the navbar brand */
+.navbar-brand {
+    font-family: 'CosmicOcto', sans-serif;
+    font-weight: 500;
+    font-size: 2rem;
+    text-decoration: none;
+    color: #ffffff; /* Adjust color as needed */
+    letter-spacing: -0.02em; /* Fine-tune letter spacing if needed */
+}
+
+/* Optional: Add hover state */
+.navbar-brand:hover {
+    color: #a74aff; /* Adjust hover color as needed */
+    opacity: 0.9;
+}
+
+/* Ensure font doesn't flash unstyled content */
+.fonts-loading .navbar-brand {
+    opacity: 0;
+}
+
+.fonts-loaded .navbar-brand {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+

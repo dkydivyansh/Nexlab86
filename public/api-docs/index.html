@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation | NexLab86</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+    
+    <style>
+        :root {
+            /* Colors */
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+            /* Transitions */
+            --transition: all 0.2s ease;
+        }
+
+        /* Add new font import */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            padding-right: 0.5rem;
+            margin-right: -0.5rem;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .nav-link i {
+            width: 1.25rem;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            opacity: 1;
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 99;
+            justify-content: center !important;
+        }
+
+        .mobile-header .menu-btn {
+            position: absolute;
+            left: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-header .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-header .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Add styles for the dashboard link */
+        .nav-link.dashboard-link {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+
+        .nav-link.dashboard-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+            max-width: calc(1200px + 280px);
+        }
+
+        /* Section */
+        .section {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .feature-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Code Examples */
+        .code-block {
+            background: var(--secondary);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-block .comment { color: #94a3b8; }
+        .code-block .string { color: #86efac; }
+        .code-block .keyword { color: #93c5fd; }
+        .code-block .function { color: #c4b5fd; }
+        .code-block .variable { color: #fca5a5; }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* API Console */
+        .console {
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .method-selector {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg);
+            color: var(--text-light);
+        }
+
+        .method-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .method-btn:hover:not(.active) {
+            background: var(--border);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Response Section */
+        .response {
+            margin-top: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .response-header {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .response-body {
+            padding: 1rem;
+            background: var(--bg);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                width: 260px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .code-block {
+                padding: 1rem;
+                font-size: 0.85rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .code-block pre {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+
+            /* Improve form elements for touch */
+            .input-field, 
+            #value-container textarea,
+            #value-container input,
+            #value-container select {
+                padding: 0.8rem;
+                font-size: 16px; /* Prevent iOS zoom */
+                min-height: 44px; /* Better touch targets */
+            }
+
+            .method-btn {
+                padding: 0.8rem 1.2rem;
+                min-height: 44px;
+            }
+
+            /* Improve modal for mobile */
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+                max-height: 85vh;
+            }
+
+            .modal-header {
+                padding: 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .code-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.5rem;
+            }
+
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                min-height: 40px;
+            }
+
+            /* Improve table responsiveness */
+            .endpoint {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin-bottom: 1.5rem;
+            }
+
+            .endpoint pre {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .mobile-header {
+                padding: 0.8rem;
+            }
+
+            .mobile-header .logo {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .main {
+                padding: 0.8rem;
+                padding-top: 4.5rem;
+            }
+
+            .section {
+                padding: 1.2rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem;
+            }
+
+            .method-selector {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .method-btn {
+                flex: 1;
+                min-width: 80px;
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .input-group {
+                margin-bottom: 1rem;
+            }
+
+            .input-label {
+                font-size: 0.9rem;
+            }
+
+            .help-text {
+                font-size: 0.8rem;
+            }
+
+            .code-block {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+
+            .copy-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Improve overlay behavior */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 98;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Add touch-friendly styles */
+        @media (hover: none) {
+            .nav-link {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-link:hover {
+                transform: none;
+            }
+
+            .feature-card:hover {
+                transform: none;
+            }
+
+            .section:hover {
+                transform: none;
+            }
+
+            .copy-btn {
+                opacity: 1;
+            }
+        }
+
+        /* Add smooth scrolling for iOS */
+        .sidebar, .modal-content, .code-block {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent text selection on interactive elements */
+        .nav-link, .method-btn, .copy-btn {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Add active states for touch devices */
+        .nav-link:active,
+        .method-btn:active,
+        .copy-btn:active {
+            opacity: 0.7;
+        }
+
+        /* Add Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--text);
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: var(--transition);
+            border-radius: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            background: var(--bg);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: var(--bg);
+        }
+
+        .code-preview .code-block {
+            margin: 0;
+        }
+
+        /* Add Footer Styles */
+        .footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .mobile-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .main {
+                margin-left: 0;
+                padding-top: 5rem;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 98;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+
+            .footer {
+                margin-left: 0;
+            }
+        }
+
+        /* Add these new styles */
+        .help-text {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .code-editor {
+            font-family: 'Fira Code', monospace;
+            min-height: 100px;
+            white-space: pre;
+        }
+
+        #value-container textarea,
+        #value-container input,
+        #value-container select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--bg);
+        }
+
+        #value-container textarea:focus,
+        #value-container input:focus,
+        #value-container select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>API Documentation</span>
+            </div>
+        </header>
+
+        <!-- Overlay for mobile -->
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">
+                    <i class="fas fa-code"></i>
+                    <span>API Documentation</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="#overview" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#authentication" class="nav-link">
+                    <i class="fas fa-key"></i>
+                    <span>Authentication</span>
+                </a>
+                <a href="#endpoints" class="nav-link">
+                    <i class="fas fa-plug"></i>
+                    <span>Endpoints</span>
+                </a>
+                <a href="#console" class="nav-link">
+                    <i class="fas fa-terminal"></i>
+                    <span>API Console</span>
+                </a>
+                <a href="#examples" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Examples</span>
+                </a>
+                <a href="https://nexlab86.dkydivyansh.com/" class="nav-link dashboard-link" target="_blank">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Go to Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <div class="section-header">
+                    <i class="fas fa-book"></i>
+                    <h2 class="section-title">Overview</h2>
+                </div>
+                <p>Welcome to our REST API documentation. This API provides secure access to data entries with support for both retrieval and updates.</p>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fas fa-lock feature-icon"></i>
+                        <h3 class="feature-title">Secure Access</h3>
+                        <p class="feature-desc">Token-based authentication ensures your data remains protected</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-database feature-icon"></i>
+                        <h3 class="feature-title">Flexible Data Types</h3>
+                        <p class="feature-desc">Support for strings, numbers, JSON objects, and arrays</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h3 class="feature-title">Fast Response</h3>
+                        <p class="feature-desc">Optimized for quick data retrieval and updates</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h3 class="feature-title">Rate Limiting</h3>
+                        <p class="feature-desc">Fair usage limits to ensure service availability</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Authentication Section -->
+            <section id="authentication" class="section">
+                <div class="section-header">
+                    <i class="fas fa-key"></i>
+                    <h2 class="section-title">Authentication</h2>
+                </div>
+                <p>All API requests require authentication using an access key. This ensures that only authorized users can access and modify data.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">
+                        <i class="fas fa-copy"></i>
+                        Copy
+                    </button>
+                    <pre><code class="language-bash">
+# GET Request
+GET https://nexlab86.dkydivyansh.com/api/v1/public/data?id=123&access_key=YOUR_ACCESS_KEY
+
+# PUT Request
+{
+    "access_key": "YOUR_ACCESS_KEY",
+    "type": "string",
+    "value": "example"
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Endpoints Section -->
+            <section id="endpoints" class="section">
+                <div class="section-header">
+                    <i class="fas fa-plug"></i>
+                    <h2 class="section-title">Endpoints</h2>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>GET /api/v1/data.php</h3>
+                    <p>Retrieve a data entry by its ID</p>
+                    <div class="code-block">
+                        <button class="copy-btn">
+                            <i class="fas fa-copy"></i>
+                            Copy
+                        </button>
+                        <pre><code class="language-bash">GET https://nexlab86.dkydivyansh.com/api/v1/public/data?id=123&access_key=YOUR_ACCESS_KEY</code></pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <h3>PUT /api/v1/data.php</h3>
+                    <p>Update an existing data entry</p>
+                    <div class="code-block">
+                        <button class="copy-btn">
+                            <i class="fas fa-copy"></i>
+                            Copy
+                        </button>
+                        <pre><code class="language-bash">PUT https://nexlab86.dkydivyansh.com/api/v1/public/data?id=123</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Console Section -->
+            <section id="console" class="section">
+                <div class="section-header">
+                    <i class="fas fa-terminal"></i>
+                    <h2 class="section-title">API Console</h2>
+                </div>
+                
+                <div class="console">
+                    <div class="method-selector">
+                        <button class="method-btn active" data-method="get">GET</button>
+                        <button class="method-btn" data-method="put">PUT</button>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Entry ID</label>
+                        <input type="number" class="input-field" id="entryId" placeholder="Enter ID" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Access Key</label>
+                        <input type="text" class="input-field" id="accessKey" placeholder="Enter your access key" required>
+                    </div>
+
+                    <div class="input-group put-only" style="display: none;">
+                        <label class="input-label">Data Type</label>
+                        <select class="input-field" id="dataType">
+                            <option value="string">String</option>
+                            <option value="number">Number</option>
+                            <option value="float">Float</option>
+                            <option value="boolean">Boolean</option>
+                            <option value="json">JSON</option>
+                            <option value="array">Array</option>
+                        </select>
+                        <small class="help-text" id="type-help"></small>
+                    </div>
+
+                    <div class="input-group put-only" style="display: none;">
+                        <label class="input-label">Value</label>
+                        <div id="value-container">
+                            <!-- Dynamic input field will be inserted here -->
+                        </div>
+                        <small class="help-text" id="value-help"></small>
+                    </div>
+
+                    <button id="sendRequest" class="method-btn active">Send Request</button>
+                    <button id="showCode" class="method-btn">Show Code</button>
+
+                    <div class="response" style="display: none;">
+                        <div class="response-header">
+                            <span>Response</span>
+                            <span class="response-status"></span>
+                        </div>
+                        <div class="response-body">
+                            <pre><code id="responseData"></code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Code Preview Modal -->
+                    <div id="codeModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Code Preview</h3>
+                                <button class="close-btn">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="code-tabs">
+                                    <button class="tab-btn active" data-lang="curl">cURL</button>
+                                    <button class="tab-btn" data-lang="javascript">JavaScript</button>
+                                    <button class="tab-btn" data-lang="python">Python</button>
+                                </div>
+                                <div class="code-preview">
+                                    <div class="code-block" id="curlCode">
+                                        <button class="copy-btn">
+                                            <i class="fas fa-copy"></i>
+                                            Copy
+                                        </button>
+                                        <pre><code></code></pre>
+                                    </div>
+                                    <div class="code-block" id="javascriptCode" style="display: none;">
+                                        <button class="copy-btn">
+                                            <i class="fas fa-copy"></i>
+                                            Copy
+                                        </button>
+                                        <pre><code></code></pre>
+                                    </div>
+                                    <div class="code-block" id="pythonCode" style="display: none;">
+                                        <button class="copy-btn">
+                                            <i class="fas fa-copy"></i>
+                                            Copy
+                                        </button>
+                                        <pre><code></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Examples Section -->
+            <section id="examples" class="section">
+                <div class="section-header">
+                    <i class="fas fa-code"></i>
+                    <h2 class="section-title">Code Examples</h2>
+                </div>
+
+                <h3>JavaScript</h3>
+                <div class="code-block">
+                    <button class="copy-btn">
+                        <i class="fas fa-copy"></i>
+                        Copy
+                    </button>
+                    <pre><code class="language-javascript">
+# GET Request
+async function getData(id, accessKey) {
+    const response = await fetch(
+        `/api/v1/data.php?id=${id}&access_key=${accessKey}`
+    );
+    return await response.json();
+}
+
+# PUT Request
+async function updateData(id, accessKey, type, value) {
+    const response = await fetch(
+        `/api/v1/data.php?id=${id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                access_key: accessKey,
+                type: type,
+                value: value
+            })
+        }
+    );
+    return await response.json();
+}</code></pre>
+                </div>
+
+                <h3>Python</h3>
+                <div class="code-block">
+                    <button class="copy-btn">
+                        <i class="fas fa-copy"></i>
+                        Copy
+                    </button>
+                    <pre><code class="language-python">
+import requests
+import json
+
+# GET Request
+def get_data(id, access_key):
+    response = requests.get(
+        '/api/v1/data.php',
+        params={'id': id, 'access_key': access_key}
+    )
+    return response.json()
+
+# PUT Request
+def update_data(id, access_key, type, value):
+    response = requests.put(
+        f'/api/v1/data.php?id={id}',
+        json={
+            'access_key': access_key,
+            'type': type,
+            'value': value
+        }
+    )
+    return response.json()</code></pre>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2024 <a href="https://dkydivyansh.com" target="_blank" rel="noopener">dkydivyansh.com</a>. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Add this at the beginning of your script section
+        // Mobile menu functionality
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a nav link on mobile
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Active link highlighting
+        function setActiveLink() {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveLink);
+        setActiveLink();
+
+        // Method switching
+        const methodBtns = document.querySelectorAll('.method-btn[data-method]');
+        const putOnlyElements = document.querySelectorAll('.put-only');
+        
+        methodBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                methodBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                if (btn.dataset.method === 'put') {
+                    putOnlyElements.forEach(el => el.style.display = 'block');
+                } else {
+                    putOnlyElements.forEach(el => el.style.display = 'none');
+                }
+            });
+        });
+
+        // Copy buttons
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.nextElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    btn.style.color = '#10b981';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.color = '';
+                    }, 2000);
+                });
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Send request
+        const sendBtn = document.getElementById('sendRequest');
+        const responseSection = document.querySelector('.response');
+        const responseData = document.getElementById('responseData');
+        const responseStatus = document.querySelector('.response-status');
+
+        sendBtn.addEventListener('click', async () => {
+            const id = document.getElementById('entryId').value;
+            const accessKey = document.getElementById('accessKey').value;
+            const method = document.querySelector('.method-btn[data-method].active').dataset.method;
+            const baseUrl = 'https://nexlab86.dkydivyansh.com/api/v1/public/data';
+
+            if (!id) {
+                alert('Please enter an ID');
+                return;
+            }
+
+            try {
+                let url = `${baseUrl}?id=${id}`;
+                let response;
+
+                if (method === 'get') {
+                    if (accessKey) {
+                        url += `&access_key=${accessKey}`;
+                    }
+                    response = await fetch(url);
+                } else {
+                    if (!accessKey) {
+                        alert('Access key is required for PUT requests');
+                        return;
+                    }
+
+                    const type = document.getElementById('dataType').value;
+                    let value = document.getElementById('dataValue').value;
+
+                    // Format value based on type
+                    if (type === 'json' || type === 'array') {
+                        try {
+                            if (type === 'array' && !value.startsWith('[')) {
+                                // Handle comma-separated values
+                                value = value.split(',').map(v => v.trim());
+                            } else {
+                                value = JSON.parse(value);
+                            }
+                        } catch (e) {
+                            alert('Invalid JSON format');
+                            return;
+                        }
+                    } else if (type === 'number') {
+                        value = parseInt(value);
+                    } else if (type === 'float') {
+                        value = parseFloat(value);
+                    } else if (type === 'boolean') {
+                        value = value === 'true';
+                    }
+
+                    response = await fetch(url, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            access_key: accessKey,
+                            type: type,
+                            value: value
+                        })
+                    });
+                }
+
+                const data = await response.json();
+                responseSection.style.display = 'block';
+                responseStatus.textContent = response.ok ? 'Success' : 'Error';
+                responseStatus.style.color = response.ok ? '#10b981' : '#ef4444';
+                responseData.textContent = JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                responseSection.style.display = 'block';
+                responseStatus.textContent = 'Error';
+                responseStatus.style.color = '#ef4444';
+                responseData.textContent = JSON.stringify({ error: error.message }, null, 2);
+            }
+        });
+
+        // Show Code functionality
+        const showCodeBtn = document.getElementById('showCode');
+        const modal = document.getElementById('codeModal');
+        const closeBtn = modal.querySelector('.close-btn');
+        const tabBtns = modal.querySelectorAll('.tab-btn');
+        const codeBlocks = {
+            curl: document.querySelector('#curlCode pre code'),
+            javascript: document.querySelector('#javascriptCode pre code'),
+            python: document.querySelector('#pythonCode pre code')
+        };
+
+        function generateCode() {
+            const id = document.getElementById('entryId').value;
+            const accessKey = document.getElementById('accessKey').value;
+            const method = document.querySelector('.method-btn[data-method].active').dataset.method;
+            const type = document.getElementById('dataType').value;
+            const value = document.getElementById('dataValue').value;
+            const baseUrl = 'https://nexlab86.dkydivyansh.com/api/v1/public/data';
+
+            // Generate cURL code
+            let curlCode = `curl -X ${method.toUpperCase()} `;
+            if (method === 'get') {
+                curlCode += `"${baseUrl}?id=${id}${accessKey ? `&access_key=${accessKey}` : ''}"`;
+            } else {
+                curlCode += `"${baseUrl}?id=${id}" \\
+     -H "Content-Type: application/json" \\
+     -d '${JSON.stringify({
+         access_key: accessKey,
+         type: type,
+         value: value
+     }, null, 2)}'`;
+            }
+            codeBlocks.curl.textContent = curlCode;
+
+            // Generate JavaScript code
+            let jsCode = `// ${method.toUpperCase()} Request\n`;
+            if (method === 'get') {
+                jsCode += `async function getData() {
+    const response = await fetch(
+        \`${baseUrl}?id=${id}${accessKey ? `&access_key=${accessKey}` : ''}\`
+    );
+    return await response.json();
+}`;
+            } else {
+                jsCode += `async function updateData() {
+    const response = await fetch(
+        '${baseUrl}?id=${id}',
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(${JSON.stringify({
+                access_key: accessKey,
+                type: type,
+                value: value
+            }, null, 4)})
+        }
+    );
+    return await response.json();
+}`;
+            }
+            codeBlocks.javascript.textContent = jsCode;
+
+            // Generate Python code
+            let pythonCode = `import requests\n\n`;
+            if (method === 'get') {
+                pythonCode += `def get_data():
+    response = requests.get(
+        '${baseUrl}',
+        params={
+            'id': '${id}'${accessKey ? `,\n            'access_key': '${accessKey}'` : ''}
+        }
+    )
+    return response.json()`;
+            } else {
+                pythonCode += `def update_data():
+    response = requests.put(
+        f'${baseUrl}?id=${id}',
+        json=${JSON.stringify({
+            access_key: accessKey,
+            type: type,
+            value: value
+        }, null, 8)}
+    )
+    return response.json()`;
+            }
+            codeBlocks.python.textContent = pythonCode;
+        }
+
+        showCodeBtn.addEventListener('click', () => {
+            generateCode();
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Tab switching
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                
+                // Update tab buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Update code blocks
+                Object.keys(codeBlocks).forEach(key => {
+                    const block = document.getElementById(`${key}Code`);
+                    block.style.display = key === lang ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Add this new function for handling dynamic value fields
+        function updateValueField(type, currentValue = '') {
+            const valueContainer = document.getElementById('value-container');
+            const valueHelp = document.getElementById('value-help');
+            let html = '';
+            let helpText = '';
+            
+            switch(type) {
+                case 'string':
+                    html = `<textarea class="input-field" id="dataValue" required>${currentValue}</textarea>`;
+                    helpText = 'Enter any text value';
+                    break;
+                    
+                case 'number':
+                    html = `<input type="number" class="input-field" id="dataValue" value="${currentValue}" required>`;
+                    helpText = 'Enter a whole number (integer)';
+                    break;
+                    
+                case 'float':
+                    html = `<input type="number" step="0.01" class="input-field" id="dataValue" value="${currentValue}" required>`;
+                    helpText = 'Enter a decimal number';
+                    break;
+                    
+                case 'boolean':
+                    html = `
+                        <select class="input-field" id="dataValue" required>
+                            <option value="true" ${currentValue === 'true' ? 'selected' : ''}>True</option>
+                            <option value="false" ${currentValue === 'false' ? 'selected' : ''}>False</option>
+                        </select>`;
+                    helpText = 'Select true or false';
+                    break;
+                    
+                case 'json':
+                    html = `<textarea class="input-field code-editor" id="dataValue" spellcheck="false" required>${currentValue}</textarea>`;
+                    helpText = 'Enter a valid JSON object. Example: {"key": "value"}';
+                    break;
+                    
+                case 'array':
+                    html = `<textarea class="input-field code-editor" id="dataValue" spellcheck="false" required>${currentValue}</textarea>`;
+                    helpText = 'Enter values separated by commas or a JSON array. Example: value1, value2, value3 or ["value1", "value2"]';
+                    break;
+            }
+            
+            valueContainer.innerHTML = html;
+            valueHelp.textContent = helpText;
+
+            // Add JSON formatting for code editors
+            if (type === 'json' || type === 'array') {
+                const editor = document.getElementById('dataValue');
+                editor.addEventListener('blur', function() {
+                    try {
+                        if (this.value.trim()) {
+                            let parsed;
+                            if (type === 'array' && !this.value.startsWith('[')) {
+                                // Handle comma-separated values
+                                parsed = this.value.split(',').map(item => item.trim());
+                            } else {
+                                parsed = JSON.parse(this.value);
+                            }
+                            this.value = JSON.stringify(parsed, null, 2);
+                        }
+                    } catch (e) {
+                        // Invalid JSON, leave as is
+                    }
+                });
+            }
+        }
+
+        // Update the existing script
+        document.addEventListener('DOMContentLoaded', function() {
+            const methodBtns = document.querySelectorAll('.method-btn[data-method]');
+            const putOnlyElements = document.querySelectorAll('.put-only');
+            const dataTypeSelect = document.getElementById('dataType');
+            
+            // Initialize value field for default type
+            updateValueField(dataTypeSelect.value);
+
+            // Listen for type changes
+            dataTypeSelect.addEventListener('change', function() {
+                updateValueField(this.value);
+            });
+
+            methodBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    methodBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    if (btn.dataset.method === 'put') {
+                        putOnlyElements.forEach(el => el.style.display = 'block');
+                    } else {
+                        putOnlyElements.forEach(el => el.style.display = 'none');
+                    }
+                });
+            });
+
+            // Update the send request function
+            sendBtn.addEventListener('click', async () => {
+                const id = document.getElementById('entryId').value;
+                const accessKey = document.getElementById('accessKey').value;
+                const method = document.querySelector('.method-btn[data-method].active').dataset.method;
+                const baseUrl = 'https://nexlab86.dkydivyansh.com/api/v1/public/data';
+
+                if (!id) {
+                    alert('Please enter an ID');
+                    return;
+                }
+
+                try {
+                    let url = `${baseUrl}?id=${id}`;
+                    let response;
+
+                    if (method === 'get') {
+                        if (accessKey) {
+                            url += `&access_key=${accessKey}`;
+                        }
+                        response = await fetch(url);
+                    } else {
+                        if (!accessKey) {
+                            alert('Access key is required for PUT requests');
+                            return;
+                        }
+
+                        const type = document.getElementById('dataType').value;
+                        let value = document.getElementById('dataValue').value;
+
+                        // Format value based on type
+                        if (type === 'json' || type === 'array') {
+                            try {
+                                if (type === 'array' && !value.startsWith('[')) {
+                                    // Handle comma-separated values
+                                    value = value.split(',').map(v => v.trim());
+                                } else {
+                                    value = JSON.parse(value);
+                                }
+                            } catch (e) {
+                                alert('Invalid JSON format');
+                                return;
+                            }
+                        } else if (type === 'number') {
+                            value = parseInt(value);
+                        } else if (type === 'float') {
+                            value = parseFloat(value);
+                        } else if (type === 'boolean') {
+                            value = value === 'true';
+                        }
+
+                        response = await fetch(url, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                access_key: accessKey,
+                                type: type,
+                                value: value
+                            })
+                        });
+                    }
+
+                    const data = await response.json();
+                    responseSection.style.display = 'block';
+                    responseStatus.textContent = response.ok ? 'Success' : 'Error';
+                    responseStatus.style.color = response.ok ? '#10b981' : '#ef4444';
+                    responseData.textContent = JSON.stringify(data, null, 2);
+
+                } catch (error) {
+                    responseSection.style.display = 'block';
+                    responseStatus.textContent = 'Error';
+                    responseStatus.style.color = '#ef4444';
+                    responseData.textContent = JSON.stringify({ error: error.message }, null, 2);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

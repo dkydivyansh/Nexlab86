@@ -1,0 +1,29 @@
+# Prevent caching for all files
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+
+    # Add universal CORS headers
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Origin, Accept"
+    Header set Access-Control-Max-Age "86400"
+</IfModule>
+
+# Handle OPTIONS preflight requests for CORS
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # If the request method is OPTIONS, respond with 200 OK
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+</IfModule>
+
+# Optional: Prevent caching for specific file types
+<FilesMatch "\.(php|html|js|css|json|xml|txt|woff|woff2|ttf|otf|svg|eot|ico)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </IfModule>
+</FilesMatch>
