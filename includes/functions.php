@@ -95,8 +95,8 @@ function sendVerificationEmail($email, $username, $token) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.hostinger.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'team@dkydivyansh.com';
-        $mail->Password   = 'Divyansh.8840';
+        $mail->Username   = '';
+        $mail->Password   = '';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
