@@ -1,4 +1,4 @@
-![Spectrum View](img\NexLab86.png)
+![Spectrum View](https://raw.githubusercontent.com/dkydivyansh/Nexlab86/main/img/NexLab86.png)
 
 ## System Overview
 The API Management System provides a secure and efficient way to manage and access data entries through both public and private APIs. The system supports various data types and implements token-based authentication for secure access.
